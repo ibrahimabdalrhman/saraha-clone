@@ -8,7 +8,7 @@ router.post(
   "/signup",
   userController.uploadUserImages,
   userController.resizeImage,
-  userValidator.signupValildator,
+  // userValidator.signupValildator,
   userController.signup
 );
 
