@@ -48,3 +48,24 @@ exports.signupValildator = [
     }),
   validationMiddleware,
 ];
+exports.loginValildator = [
+  check("username")
+    .notEmpty()
+    .withMessage("username required"),
+  body("username").custom((username) => {
+    return User.findOne({ username: username })
+      .then((result) => {
+        if (!result) {
+          return Promise.reject(new Error(`username :  ${username} not Found`));
+        }
+        return true;
+      })
+  }),
+  check("password")
+    .notEmpty()
+    .withMessage("password required")
+    .isLength({ min: 6 })
+    .withMessage("must be at least 6 chars"),
+  
+  validationMiddleware,
+];
